@@ -1,4 +1,4 @@
-package com.example.bitshaw.tabledemo;
+package com.example.bitshaw.dynamictable;
 
 /**
  * Created by BITshaw on 2018/1/24.

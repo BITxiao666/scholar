@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">TableDemo</string>
+    <string name="app_name">DynamicTable</string>
+    <string name="action_settings">Settings</string>
 </resources>

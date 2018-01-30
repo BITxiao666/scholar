@@ -1,4 +1,4 @@
-package com.example.bitshaw.tabledemo;
+package com.example.bitshaw.dynamictable;
 
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
