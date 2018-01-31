@@ -3,6 +3,6 @@
     <dbname value="CourseInfo"></dbname>
     <version value="1"></version>
     <list>
-        <mapping class="com.example.bitshaw.dynamictable.Course"></mapping>
+        <mapping class="com.example.bitshaw.menutest.Course"></mapping>
     </list>
 </litepal>
