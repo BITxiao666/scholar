@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">MenuTest</string>
     <string name="action_settings">Settings</string>
- 	<string name="text">This is dynamic class table develop for students of Beijing Institute of Technology </string>
+    <string name="text">This is dynamic class table develop for students of Beijing Institute of Technology </string>
     <string name="title">My Description</string>
     <string name="context_menu">Context menu</string>
 </resources>

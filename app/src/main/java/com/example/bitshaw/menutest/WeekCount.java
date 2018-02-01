@@ -1,10 +1,19 @@
 package com.example.bitshaw.menutest;
 
+import android.content.Context;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.util.Calendar;
 import java.util.Date;
 
 /**
  * Created by BITshaw on 2018/1/30.
+ * 用于维护当前周
  */
 
 public class WeekCount {
@@ -18,26 +27,26 @@ public class WeekCount {
         cal.setTime(new Date());
         int weeks=cal.get(Calendar.WEEK_OF_YEAR);
         first_week = weeks -12;
+
     }
 
     public static void reset(int current_week){
-        Calendar cal = Calendar.getInstance();//这一句必须要设置，否则美国认为第一天是周日，而我国认为是周一，对计算当期日期是第几周会有错误
+        Calendar cal = Calendar.getInstance();
         cal.setFirstDayOfWeek(Calendar.MONDAY); // 设置每周的第一天为星期一
         cal.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);// 每周从周一开始
         cal.setMinimalDaysInFirstWeek(7); // 设置每周最少为7天
         cal.setTime(new Date());
         int weeks=cal.get(Calendar.WEEK_OF_YEAR);
         first_week = weeks - current_week;
-
     }
 
     public static int getCurrentWeek(){
-        Calendar cal = Calendar.getInstance();//这一句必须要设置，否则美国认为第一天是周日，而我国认为是周一，对计算当期日期是第几周会有错误
+        Calendar cal = Calendar.getInstance();
         cal.setFirstDayOfWeek(Calendar.MONDAY); // 设置每周的第一天为星期一
         cal.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);// 每周从周一开始
         cal.setMinimalDaysInFirstWeek(7); // 设置每周最少为7天
         cal.setTime(new Date());
-        int weeks=cal.get(Calendar.WEEK_OF_YEAR);
+        int weeks=cal.get(Calendar.WEEK_OF_YEAR);//得到当前周
         return weeks - first_week;
     }
 

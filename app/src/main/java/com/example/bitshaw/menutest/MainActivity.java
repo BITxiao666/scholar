@@ -15,12 +15,15 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -45,10 +48,10 @@ import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity implements OnMenuItemClickListener, OnMenuItemLongClickListener {
 
-    @BindView(R.id.week)
+    @BindView(R.id.week_main)
     LinearLayout week;
 
-    @BindView(R.id.segments)
+    @BindView(R.id.segments_main)
     LinearLayout segments;
 
     @BindViews({R.id.weekPanel_1, R.id.weekPanel_2, R.id.weekPanel_3, R.id.weekPanel_4,
@@ -71,6 +74,11 @@ public class MainActivity extends AppCompatActivity implements OnMenuItemClickLi
         LitePal.getDatabase();
         debugfun();
         initCell_1();
+        ClickFloatButton();
+        //addFragment(new MainFragment(), true, R.id.container);
+    }
+
+    private void ClickFloatButton(){
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,13 +86,15 @@ public class MainActivity extends AppCompatActivity implements OnMenuItemClickLi
                 /*Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();*/
                 Intent intent = new Intent(MainActivity.this,
-                        EditActivity.class);
+                        ChangeWeekActivity.class);
                 startActivity(intent);
             }
         });
-        //addFragment(new MainFragment(), true, R.id.container);
     }
-
+    /**
+     * 初始化一些用于测试的数据
+     * 发布版本中可能会删除
+     */
     private void debugfun()
     {
         List<Course> list = DataSupport.findAll(Course.class);
@@ -107,6 +117,9 @@ public class MainActivity extends AppCompatActivity implements OnMenuItemClickLi
         }
     }
 
+    /**
+     * 创建课程的横栏（周一~周五）
+     */
     public void initDayView() {
         List<String> str_week = new ArrayList<>();
         str_week.add("周一");
@@ -145,6 +158,9 @@ public class MainActivity extends AppCompatActivity implements OnMenuItemClickLi
         }
     }
 
+    /**
+     * 创建课程表的竖栏（第一节到第五节）
+     */
     private void initSegmentView() {
         List<String> str_segment = new ArrayList<>();
         str_segment.add("上午\n"+"1");
@@ -170,6 +186,9 @@ public class MainActivity extends AppCompatActivity implements OnMenuItemClickLi
         }
     }
 
+    /**
+     * 动态加载每一节课
+     */
     public void initCell_1(){
         for (int i=1;i<=5;i++) {
             for (int j=1;j<=5;j++) {
@@ -257,6 +276,9 @@ public class MainActivity extends AppCompatActivity implements OnMenuItemClickLi
         }
     }
 
+    /**
+     * 初始化toolbar栏
+     */
     private void initMenuFragment() {
         MenuParams menuParams = new MenuParams();
         menuParams.setActionBarSize((int) getResources().getDimension(R.dimen.tool_bar_height));
@@ -267,52 +289,42 @@ public class MainActivity extends AppCompatActivity implements OnMenuItemClickLi
         mMenuDialogFragment.setItemLongClickListener(this);
     }
 
+    /**
+     * 函数来自开源框架
+     * https://github.com/Yalantis/Context-Menu.Android
+     * @return
+     */
     private List<MenuObject> getMenuObjects() {
-        // You can use any [resource, bitmap, drawable, color] as image:
-        // item.setResource(...)
-        // item.setBitmap(...)
-        // item.setDrawable(...)
-        // item.setColor(...)
-        // You can set image ScaleType:
-        // item.setScaleType(ScaleType.FIT_XY)
-        // You can use any [resource, drawable, color] as background:
-        // item.setBgResource(...)
-        // item.setBgDrawable(...)
-        // item.setBgColor(...)
-        // You can use any [color] as text color:
-        // item.setTextColor(...)
-        // You can set any [color] as divider color:
-        // item.setDividerColor(...)
 
         List<MenuObject> menuObjects = new ArrayList<>();
 
         MenuObject close = new MenuObject();
         close.setResource(R.drawable.icn_close);
 
-        MenuObject send = new MenuObject("Send message");
+        MenuObject send = new MenuObject("添加课程");
         send.setResource(R.drawable.icn_1);
 
-        MenuObject like = new MenuObject("Like profile");
+        MenuObject like = new MenuObject("转到下周");
         Bitmap b = BitmapFactory.decodeResource(getResources(), R.drawable.icn_2);
         like.setBitmap(b);
 
-        MenuObject addFr = new MenuObject("Add to friends");
+        MenuObject addFr = new MenuObject("新建学期");
         BitmapDrawable bd = new BitmapDrawable(getResources(),
                 BitmapFactory.decodeResource(getResources(), R.drawable.icn_3));
         addFr.setDrawable(bd);
 
-        MenuObject addFav = new MenuObject("Add to favorites");
+        MenuObject addFav = new MenuObject("关于我们");
         addFav.setResource(R.drawable.icn_4);
 
-        MenuObject block = new MenuObject("Block user");
-        block.setResource(R.drawable.icn_5);
+        /*MenuObject block = new MenuObject("Block user");
+        block.setResource(R.drawable.icn_5);*/
 
         menuObjects.add(close);
         menuObjects.add(send);
         menuObjects.add(like);
         menuObjects.add(addFr);
         menuObjects.add(addFav);
-        menuObjects.add(block);
+        //menuObjects.add(block);
         return menuObjects;
     }
 
@@ -380,8 +392,26 @@ public class MainActivity extends AppCompatActivity implements OnMenuItemClickLi
     }
 
     @Override
+    protected void onUserLeaveHint() {
+        finish();
+        super.onUserLeaveHint();
+    }
+
+    @Override
     public void onMenuItemClick(View clickedView, int position) {
-        Toast.makeText(this, "Clicked on position: " + position, Toast.LENGTH_SHORT).show();
+        if(position == 1){
+            Intent intent = new Intent(MainActivity.this,
+                    EditActivity.class);
+            startActivity(intent);
+        }else if(position == 2){
+            Intent intent = new Intent(MainActivity.this,
+                    ChangeWeekActivity.class);
+            startActivity(intent);
+        }
+        else if(position == 3){
+            Course.courseClear();
+        }
+        //Toast.makeText(this, "Clicked on position: " + position, Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -389,6 +419,9 @@ public class MainActivity extends AppCompatActivity implements OnMenuItemClickLi
         Toast.makeText(this, "Long clicked on position: " + position, Toast.LENGTH_SHORT).show();
     }
 
+    /**
+     * 调用了onCreate方法，解决动态刷新问题
+     */
     @Override
     protected void onRestart() {
         super.onRestart();
@@ -412,15 +445,15 @@ public class MainActivity extends AppCompatActivity implements OnMenuItemClickLi
         dialog.getWindow().setAttributes(p);     //设置生效
 
         dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-        TextView textView = (TextView) dialog.findViewById(R.id.name);
+        TextView textView = (TextView) dialog.findViewById(R.id.name_detail);
         textView.setText(course.getCourse_name());
-        textView = (TextView) dialog.findViewById(R.id.teacher);
+        textView = (TextView) dialog.findViewById(R.id.teacher_detail);
         textView.setText(course.getTutor_name());
-        textView = (TextView) dialog.findViewById(R.id.address);
+        textView = (TextView) dialog.findViewById(R.id.address_detail);
         textView.setText(course.getSite());
-        textView = (TextView) dialog.findViewById(R.id.week);
+        textView = (TextView) dialog.findViewById(R.id.week_detail);
         textView.setText(course.getBegin_week()+" - "+course.getFinish_week());
-        textView = (TextView)dialog.findViewById(R.id.edit_course);
+        textView = (TextView)dialog.findViewById(R.id.edit_course_detail);
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -1,5 +1,8 @@
 package com.example.bitshaw.menutest;
 
+import android.content.Intent;
+import android.widget.Toast;
+
 import org.litepal.crud.DataSupport;
 
 import java.util.List;
@@ -74,6 +77,17 @@ public class Course extends DataSupport{
         finish_week = _finish_week;
         time = _time;
     }
+
+    public static void courseClear() {
+        List<Course> list = DataSupport.findAll(Course.class);
+        int i;
+        for (i=0;i<list.size();i++){
+            if (list.get(i).getTime()<60){
+                DataSupport.delete(Course.class,list.get(i).getId());
+            }
+        }
+    }
+
 
     public Course(int _id, String _course_name, String _tutor_name, String _site,
                   int _begin_week, int _finish_week, int _time) {

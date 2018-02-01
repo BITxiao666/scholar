@@ -1,11 +1,13 @@
 package com.example.bitshaw.menutest;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.litepal.crud.DataSupport;
@@ -18,25 +20,25 @@ import com.example.bitshaw.menutest.R;
 
 public class EditActivity extends AppCompatActivity {
 
-    @BindView(R.id.course_name)
+    @BindView(R.id.course_name_edit)
     EditText course_name;
 
-    @BindView(R.id.tutor_name)
+    @BindView(R.id.tutor_name_edit)
     EditText tutor_name;
 
-    @BindView(R.id.begin_week)
+    @BindView(R.id.begin_week_edit)
     EditText begin_week;
 
-    @BindView(R.id.finish_week)
+    @BindView(R.id.finish_week_edit)
     EditText finish_week;
 
-    @BindView(R.id.day)
+    @BindView(R.id.day_edit)
     EditText which_day;
 
-    @BindView(R.id.segment)
+    @BindView(R.id.segment_edit)
     EditText which_segment;
 
-    @BindView(R.id.site)
+    @BindView(R.id.site_edit)
     EditText site;
 
     private Course old_course = null;
@@ -56,9 +58,9 @@ public class EditActivity extends AppCompatActivity {
         }
         ButterKnife.bind(this);
         init_course();
-        Toast.makeText(EditActivity.this,"请输入阿拉伯数字",Toast.LENGTH_SHORT).show();
 
-        Button save_button = (Button) findViewById(R.id.save_button);
+
+        TextView save_button = (TextView) findViewById(R.id.save_button_edit);
         save_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -66,7 +68,7 @@ public class EditActivity extends AppCompatActivity {
             }
         });
 
-        Button back_button = (Button) findViewById(R.id.back_button);
+        TextView back_button = (TextView) findViewById(R.id.back_button_edit);
         back_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -81,7 +83,7 @@ public class EditActivity extends AppCompatActivity {
                 }
             }
         });
-        Button delete_button = (Button) findViewById(R.id.delete_button);
+        TextView delete_button = (TextView) findViewById(R.id.delete_button_edit);
         delete_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -103,6 +105,7 @@ public class EditActivity extends AppCompatActivity {
     }
 
     private void init_course(){
+
         if(course_id==-1){
             return;
         }

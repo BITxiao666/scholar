@@ -6,87 +6,226 @@
     android:layout_height="match_parent"
     tools:context="com.example.bitshaw.menutest.EditActivity">
 
-    <LinearLayout
-        android:id="@+id/layout_edit"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         >
-    <EditText
-        android:id="@+id/course_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="课程名称"/>
-
-
-        <EditText
-            android:id="@+id/tutor_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="导师姓名"/>
-
-        <EditText
-            android:id="@+id/site"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="上课地点"/>
         <LinearLayout
+            android:layout_height="36dp"
             android:layout_width="match_parent"
+            />
+        <LinearLayout
             android:layout_height="wrap_content"
+            android:layout_width="match_parent"
             android:orientation="horizontal">
-
-            <EditText
-                android:id="@+id/begin_week"
+            <TextView
+                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:text="课程"/>
+            <EditText android:id="@+id/course_name_edit"
+                android:hint="  中文或英文"
+                android:background="@drawable/shape_progress"
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dip"
+                android:paddingBottom="10dip"
+                android:gravity="center_vertical|center_horizontal"/>
+            <TextView
                 android:layout_height="match_parent"
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:hint="开始周"/>
-
-            <EditText
-                android:id="@+id/finish_week"
+                android:gravity="center"
+                android:text=""/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_height="6dp"
+            android:layout_width="match_parent"/>
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:text="老师"/>
+            <EditText android:id="@+id/tutor_name_edit"
+                android:background="@drawable/shape_progress"
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dip"
+                android:paddingBottom="10dip"
+                android:gravity="center_vertical|center_horizontal"/>
+            <TextView
                 android:layout_height="match_parent"
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:hint="结束周"/>
+                android:gravity="center"
+                android:text=""/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_height="6dp"
+            android:layout_width="match_parent"/>
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:text="地点"/>
+            <EditText android:id="@+id/site_edit"
+                android:background="@drawable/shape_progress"
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dip"
+                android:paddingBottom="10dip"
+                android:gravity="center_vertical|center_horizontal"/>
+            <TextView
+                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text=""/>
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_height="6dp"
+            android:layout_width="match_parent"/>
+        <LinearLayout
             android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:text="周数"/>
+            <EditText android:id="@+id/begin_week_edit"
+                android:background="@drawable/shape_progress"
+                android:layout_width="0dp"
+                android:layout_weight="1.25"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dip"
+                android:paddingBottom="10dip"
+                android:hint="数字"
+                android:gravity="center_vertical|center_horizontal"/>
+            <TextView
+                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="至"/>
+            <EditText android:id="@+id/finish_week_edit"
+                android:background="@drawable/shape_progress"
+                android:layout_width="0dp"
+                android:layout_weight="1.25"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dip"
+                android:paddingBottom="10dip"
+                android:gravity="center_vertical|center_horizontal"/>
+            <TextView
+                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="0.5"
+                android:gravity="center"
+                android:text=""/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_height="6dp"
+            android:layout_width="match_parent"/>
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:text="周几"/>
+            <EditText android:id="@+id/day_edit"
+                android:background="@drawable/shape_progress"
+                android:layout_width="0dp"
+                android:layout_weight="1.25"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dip"
+                android:paddingBottom="10dip"
+                android:gravity="center_vertical|center_horizontal"/>
+            <TextView
+                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="哪节"/>
+            <EditText android:id="@+id/segment_edit"
+                android:background="@drawable/shape_progress"
+                android:layout_width="0dp"
+                android:layout_weight="1.25"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dip"
+                android:paddingBottom="10dip"
+                android:gravity="center_vertical|center_horizontal"/>
+            <TextView
+                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="0.5"
+                android:gravity="center"
+                android:text=""/>
+        </LinearLayout>
+
+    </LinearLayout>
+        <LinearLayout
+            android:layout_height="100dp"
+            android:layout_width="match_parent"
+            android:gravity="top"
+            android:layout_alignParentBottom="true"
             android:orientation="horizontal">
 
-            <EditText
-                android:id="@+id/day"
-                android:layout_height="match_parent"
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="0.73"
+                android:layout_height="match_parent" />
+
+            <TextView
+                android:id="@+id/back_button_edit"
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:hint="哪一天"/>
-
-            <EditText
-                android:id="@+id/segment"
                 android:layout_height="match_parent"
+                android:drawableLeft="@drawable/ic_edit_back"
+                android:gravity="center"
+                android:textColor="@android:color/black" />
+            <TextView
+                android:id="@+id/save_button_edit"
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:hint="哪一节"/>
-        </LinearLayout>>
+                android:layout_height="match_parent"
+                android:drawableLeft="@drawable/ic_sure"
+                android:gravity="center"
+                android:textColor="@android:color/black" />
+            <TextView
+                android:id="@+id/delete_button_edit"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:drawableLeft="@drawable/ic_delete"
+                android:gravity="center"
+                android:textColor="@android:color/black" />
+        </LinearLayout>
 
-    <Button
-        android:id="@+id/save_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="save"
-        />
-        <Button
-            android:id="@+id/delete_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="delete"
-            />
-        <Button
-            android:id="@+id/back_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="back"
-            />
-    </LinearLayout>>
+    </RelativeLayout>
 </android.support.constraint.ConstraintLayout>
