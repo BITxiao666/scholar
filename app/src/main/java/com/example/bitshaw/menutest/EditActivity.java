@@ -1,9 +1,11 @@
 package com.example.bitshaw.menutest;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -87,7 +89,8 @@ public class EditActivity extends AppCompatActivity {
         delete_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                delete_course();
+                confirm_delete();
+                //delete_course();
             }
         });
     }
@@ -164,6 +167,39 @@ public class EditActivity extends AppCompatActivity {
                 MainActivity.class);
         startActivity(intent_back);
         finish();
+    }
+
+    private void confirm_delete(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        final AlertDialog dialog = builder.create();
+        dialog.show();
+        dialog.setContentView(R.layout.confirm_delete_layout);
+
+        DisplayMetrics dm=this.getResources().getDisplayMetrics();
+        int displayWidth = dm.widthPixels;
+        int displayHeight = dm.heightPixels;
+        android.view.WindowManager.LayoutParams p = dialog.getWindow().getAttributes();  //获取对话框当前的参数值
+        p.width = (int) (displayWidth * 0.66);    //宽度设置为屏幕的0.66
+        //p.height = (int) (displayHeight * 0.28);    //高度设置为屏幕的0.28
+        dialog.setCanceledOnTouchOutside(true);// 设置点击屏幕Dialog消失
+        dialog.getWindow().setAttributes(p);     //设置生效
+        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+
+        TextView esc = (TextView)dialog.findViewById(R.id.confirm_delete_esc);
+        esc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        TextView confirm = (TextView)dialog.findViewById(R.id.confirm_delete_confirm);
+        confirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                delete_course();
+            }
+        });
     }
 
     private int editCheck() {

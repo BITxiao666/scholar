@@ -14,7 +14,7 @@ public class ChangeWeekActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_week);
         final EditText editText = (EditText) findViewById(R.id.new_current_week);
-        editText.setText(String.valueOf(WeekCount.getCurrenDay()));
+        editText.setText(String.valueOf(WeekCount.getCurrentWeek()));
 
         TextView save_button = (TextView) findViewById(R.id.save_button_week);
         save_button.setOnClickListener(new View.OnClickListener() {

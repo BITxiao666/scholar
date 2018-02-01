@@ -22,7 +22,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".EditActivity" />
-        <activity android:name=".WeekActivity" />
         <activity android:name=".ChangeWeekActivity"></activity>
     </application>
 

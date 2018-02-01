@@ -57,7 +57,6 @@ public class MainActivity extends AppCompatActivity implements OnMenuItemClickLi
     @BindViews({R.id.weekPanel_1, R.id.weekPanel_2, R.id.weekPanel_3, R.id.weekPanel_4,
             R.id.weekPanel_5})
     List<LinearLayout> mcellViews;
-
     private FragmentManager fragmentManager;
     private ContextMenuDialogFragment mMenuDialogFragment;
 
@@ -227,7 +226,7 @@ public class MainActivity extends AppCompatActivity implements OnMenuItemClickLi
                         @Override
                         public void onClick(View v) {
                             if(course!=null) {
-                                showCouseDetails(course);
+                                showCourseDetails(course);
                             }
                         }
                     });
@@ -302,19 +301,19 @@ public class MainActivity extends AppCompatActivity implements OnMenuItemClickLi
         close.setResource(R.drawable.icn_close);
 
         MenuObject send = new MenuObject("添加课程");
-        send.setResource(R.drawable.icn_1);
+        send.setResource(R.drawable.ic_add_course);
 
         MenuObject like = new MenuObject("转到下周");
-        Bitmap b = BitmapFactory.decodeResource(getResources(), R.drawable.icn_2);
+        Bitmap b = BitmapFactory.decodeResource(getResources(), R.drawable.ic_change_week);
         like.setBitmap(b);
 
         MenuObject addFr = new MenuObject("新建学期");
         BitmapDrawable bd = new BitmapDrawable(getResources(),
-                BitmapFactory.decodeResource(getResources(), R.drawable.icn_3));
+                BitmapFactory.decodeResource(getResources(), R.drawable.ic_term));
         addFr.setDrawable(bd);
 
-        MenuObject addFav = new MenuObject("关于我们");
-        addFav.setResource(R.drawable.icn_4);
+        MenuObject addFav = new MenuObject("获取源码");
+        addFav.setResource(R.drawable.ic_github);
 
         /*MenuObject block = new MenuObject("Block user");
         block.setResource(R.drawable.icn_5);*/
@@ -345,7 +344,7 @@ public class MainActivity extends AppCompatActivity implements OnMenuItemClickLi
                 onBackPressed();
             }
         });*/
-        mToolBarTextView.setText("      "+String.valueOf(WeekCount.getCurrentWeek()));
+        mToolBarTextView.setText("         "+String.valueOf(WeekCount.getCurrentWeek()));
     }
 
     protected void addFragment(Fragment fragment, boolean addToBackStack, int containerId) {
@@ -409,10 +408,12 @@ public class MainActivity extends AppCompatActivity implements OnMenuItemClickLi
             startActivity(intent);
         }
         else if(position == 3){
-            Course.courseClear();
+            confirm_claer();
+            //Course.courseClear();
         }
         //Toast.makeText(this, "Clicked on position: " + position, Toast.LENGTH_SHORT).show();
     }
+
 
     @Override
     public void onMenuItemLongClick(View clickedView, int position) {
@@ -429,7 +430,7 @@ public class MainActivity extends AppCompatActivity implements OnMenuItemClickLi
         onCreate(null);
     }
 
-    public void showCouseDetails(final Course course) {
+    public void showCourseDetails(final Course course) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         AlertDialog dialog = builder.create();
         dialog.show();
@@ -461,6 +462,39 @@ public class MainActivity extends AppCompatActivity implements OnMenuItemClickLi
                         EditActivity.class);
                 intent.putExtra("tag_course_id",course.getId());
                 startActivity(intent);
+            }
+        });
+    }
+
+    private void confirm_claer(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        final AlertDialog dialog = builder.create();
+        dialog.show();
+        dialog.setContentView(R.layout.clear_course_layout);
+        DisplayMetrics dm=this.getResources().getDisplayMetrics();
+        int displayWidth = dm.widthPixels;
+        int displayHeight = dm.heightPixels;
+        android.view.WindowManager.LayoutParams p = dialog.getWindow().getAttributes();  //获取对话框当前的参数值
+        p.width = (int) (displayWidth * 0.66);    //宽度设置为屏幕的0.66
+        //p.height = (int) (displayHeight * 0.28);    //高度设置为屏幕的0.28
+        dialog.setCanceledOnTouchOutside(true);// 设置点击屏幕Dialog消失
+        dialog.getWindow().setAttributes(p);     //设置生效
+        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+
+        TextView esc = (TextView)dialog.findViewById(R.id.clear_course_esc);
+        esc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        TextView confirm = (TextView)dialog.findViewById(R.id.clear_course_confirm);
+        confirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Course.courseClear();
+                dialog.dismiss();
             }
         });
     }
