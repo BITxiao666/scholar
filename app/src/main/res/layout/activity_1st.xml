@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.javacourseexercise.GPAItem.Activity_1st">
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <include layout="@layout/activity_1st_title"></include>
+
+    <!--<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:orientation="vertical">-->
+    <!--<include layout="@layout/toolbar" />-->
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/activity_1st_recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+
+</LinearLayout>
+    <!--<Button-->
+        <!--android:id="@+id/activity_1st_additem"-->
+        <!--android:layout_width="384dp"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_gravity="center"-->
+        <!--android:text="创建" />-->
+
+    <!--<Button-->
+        <!--android:id="@+id/activity_1st_eixt"-->
+        <!--android:layout_width="398dp"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_gravity="center"-->
+        <!--android:text="确认" />-->
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/activity_1st_additem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        android:src="@drawable/ic_plus" />
+
+</android.support.design.widget.CoordinatorLayout>
+<!--</RelativeLayout>-->
